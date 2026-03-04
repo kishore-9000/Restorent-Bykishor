@@ -126,7 +126,7 @@ nav ul li a:hover {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1920');
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80');
     background-size: cover;
     background-position: center;
     padding: 0 5%;
@@ -289,7 +289,7 @@ nav ul li a:hover {
     flex: 1;
     min-width: 300px;
     height: 400px;
-    background: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=800');
+    background: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&q=80');
     background-size: cover;
     background-position: center;
     border-radius: 30px;
