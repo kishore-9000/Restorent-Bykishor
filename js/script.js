@@ -146,4 +146,117 @@ document.addEventListener('DOMContentLoaded', () => {
             behavior: 'smooth'
         });
     });
+
+    // --- Booking System Logic ---
+    let cart = [];
+    const cartFab = document.getElementById('cart-fab');
+    const cartCount = document.getElementById('cart-count');
+    const orderModal = document.getElementById('order-modal');
+    const closeModal = document.querySelector('.close-modal');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotalDisplay = document.getElementById('cart-total');
+    const placeOrderBtn = document.getElementById('place-order-btn');
+
+    // Add to Cart
+    document.querySelectorAll('.order-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const name = btn.getAttribute('data-name');
+            const price = parseInt(btn.getAttribute('data-price'));
+
+            addToCart(name, price);
+
+            // Animation feedback for button
+            btn.innerHTML = '<i class="fas fa-check"></i> Added';
+            btn.style.background = '#27ae60';
+            setTimeout(() => {
+                btn.innerHTML = 'Order Now';
+                btn.style.background = '';
+            }, 1000);
+        });
+    });
+
+    function addToCart(name, price) {
+        cart.push({ id: Date.now(), name, price });
+        updateCartUI();
+    }
+
+    function removeFromCart(id) {
+        cart = cart.filter(item => item.id !== id);
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        // Update count
+        cartCount.textContent = cart.length;
+
+        // Update items list
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Your cart is empty.</p>';
+            placeOrderBtn.disabled = true;
+            cartTotalDisplay.textContent = '₹0';
+        } else {
+            cartItemsContainer.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                total += item.price;
+                const itemEl = document.createElement('div');
+                itemEl.className = 'cart-item';
+                itemEl.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <span>₹${item.price}</span>
+                    </div>
+                    <i class="fas fa-trash remove-item" onclick="window.removeItemFromOrder(${item.id})"></i>
+                `;
+                cartItemsContainer.appendChild(itemEl);
+            });
+
+            cartTotalDisplay.textContent = `₹${total}`;
+            placeOrderBtn.disabled = false;
+        }
+    }
+
+    // Expose remove function to window for the onclick handler
+    window.removeItemFromOrder = (id) => {
+        removeFromCart(id);
+    };
+
+    // Modal Controls
+    cartFab.addEventListener('click', () => {
+        orderModal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scroll
+    });
+
+    closeModal.addEventListener('click', () => {
+        orderModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target === orderModal) {
+            orderModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Place Order
+    placeOrderBtn.addEventListener('click', () => {
+        if (cart.length === 0) return;
+
+        const total = cartTotalDisplay.textContent;
+        placeOrderBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        placeOrderBtn.disabled = true;
+
+        setTimeout(() => {
+            alert(`🎉 Order Placed Successfully!\n\nThank you for choosing Kishore Cafe. Your delicious meal (Total: ${total}) is being prepared and will be served shortly.`);
+
+            // Reset Cart
+            cart = [];
+            updateCartUI();
+            orderModal.classList.remove('active');
+            document.body.style.overflow = '';
+            placeOrderBtn.innerHTML = 'Place Order Now';
+        }, 1500);
+    });
 });
