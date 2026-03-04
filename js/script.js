@@ -1,4 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Header Animation
+    const header = document.querySelector('header');
+    header.style.opacity = '0';
+    header.style.transform = 'translateY(-20px)';
+
+    setTimeout(() => {
+        header.style.transition = 'all 0.8s ease';
+        header.style.opacity = '1';
+        header.style.transform = 'translateY(0)';
+    }, 100);
     // Scroll reveals
     const observerOptions = {
         threshold: 0.1
@@ -110,6 +120,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             });
+        });
+    });
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+        } else {
+            backToTopBtn.classList.remove('visible');
+        }
+    });
+
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
     });
 });
