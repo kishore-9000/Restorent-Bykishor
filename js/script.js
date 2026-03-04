@@ -38,6 +38,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Contact Form Handling
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Collect form data (simulated)
+            const name = contactForm.querySelector('input[type="text"]').value;
+
+            // Show success message
+            alert(`Thank you, ${name}! Your message has been sent successfully.`);
+
+            // Clear form
+            contactForm.reset();
+        });
+    }
+
     // Simple Filtering (Future expansion)
     const filterBtns = document.querySelectorAll('.filter-btn');
     filterBtns.forEach(btn => {
