@@ -1,0 +1,34 @@
+# Walkthrough - Image Updates and Menu Expansion
+
+I have successfully updated the Kishore Cafe website with high-quality images and three new signature dishes.
+
+## Changes Made
+
+### 1. Fixed Broken Images
+- Replaced all 23 existing menu item images with fresh, high-quality Unsplash photos.
+- Updated the Hero section background and the "About" section image for a more premium look.
+
+### 2. Expanded the Menu
+Added three new popular Indian dishes:
+- **Chole Bhature** (Main Course - Veg): Spicy chickpeas with fluffy fried bread.
+- **Pav Bhaji** (Main Course - Veg): Mashed vegetable curry with buttered rolls.
+- **Mango Kulfi** (Desserts): Traditional Indian frozen mango dessert.
+
+## How to Save and Publish
+
+The changes I made are **automatically saved** to your local files ([index.html](file:///c:/Users/DELL/OneDrive/%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/PROJECTS/cafe/Restorent-Bykishor/index.html) and [css/style.css](file:///c:/Users/DELL/OneDrive/%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88/PROJECTS/cafe/Restorent-Bykishor/css/style.css)).
+
+To publish these changes to your live website (`kishore-9000.github.io`):
+1. Open your terminal in the project directory.
+2. Run the following git commands:
+   ```bash
+   git add .
+   git commit -m "Update images and add new menu items"
+   git push origin main
+   ```
+Your GitHub Action (`static.yml`) will then automatically deploy the updated site.
+
+## Verification
+- I have updated the HTML structure and CSS references.
+- All new categories and item classes match existing filtering logic.
+- Images are set to `loading="lazy"` for better performance.
