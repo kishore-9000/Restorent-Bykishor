@@ -22,9 +22,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.menu-item, .contact-container, .about-content, .about-image').forEach(el => {
+    const revealElements = document.querySelectorAll('.reveal, .contact-container, .about-content, .about-image');
+    revealElements.forEach(el => {
         observer.observe(el);
     });
+
+    // Fail-safe: Reveal everything after 3 seconds in case observer fails
+    setTimeout(() => {
+        revealElements.forEach(el => el.classList.add('show'));
+    }, 3000);
 
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
