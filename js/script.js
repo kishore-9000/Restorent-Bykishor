@@ -78,13 +78,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Simple Filtering (Future expansion)
+    // Simple Filtering
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const menuItems = document.querySelectorAll('.menu-item');
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+            // Update active state
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            // Logic for filtering items would go here
+
+            const category = btn.textContent;
+
+            // Filter items
+            menuItems.forEach(item => {
+                const itemCategory = item.getAttribute('data-category');
+
+                if (category === 'All') {
+                    item.style.display = 'block';
+                } else if (category === 'Non-Veg') {
+                    if (item.classList.contains('non-veg')) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                } else {
+                    if (itemCategory === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
         });
     });
 });
